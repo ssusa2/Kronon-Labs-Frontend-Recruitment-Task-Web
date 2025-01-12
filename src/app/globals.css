@@ -37,21 +37,7 @@
   font-style: normal;
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   font-family: 'BinancePlex', Arial, sans-serif;
   box-sizing: border-box;
@@ -68,6 +54,8 @@ body {
 }
 
 .trading-layout {
+  border-top-width: 4px;
+  border-color: #0b0e11;
   grid-template-areas:
     'left subHeader subHeader market right'
     'left orderBook chart market right'
@@ -164,4 +152,69 @@ body {
 }
 .footer {
   grid-area: footer;
+}
+
+.card-ui {
+  @apply rounded-lg pt-[4px] pb-[4px] text-primaryText !bg-basicBg w-full h-full;
+}
+
+.tickerItemLabel {
+  @apply text-xsmall text-textThird leading-[22px] font-[400] whitespace-nowrap text-ellipsis mb-[2px];
+}
+
+@screen mobile {
+  .tickerItemLabel {
+    @apply text-mobile-xs leading-[16px] mb-[0px] mr-[4px];
+  }
+}
+
+.tickerPriceText {
+  @apply text-xsmall text-primaryText leading-[16px];
+}
+
+.nowPrice {
+  @apply text-base leading-[24px] font-[600];
+}
+
+.subPrice {
+  @apply text-xsmall text-primaryText leading-[16px];
+}
+
+.tag {
+  @apply tickerPriceText !text-textLink block relative cursor-pointer;
+}
+
+.symbol-tags > .tag:nth-child(n + 2)::before {
+  content: '';
+  display: inline-block;
+  width: 0.5px;
+  height: 8px;
+  background: #474d57; /* 원하는 색상 변수 사용 */
+  position: absolute;
+  top: 5px;
+  left: -8px;
+}
+.scrollbar {
+  @apply overflow-x-auto whitespace-nowrap;
+}
+
+.scrollbar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #222;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE 및 Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }

@@ -1,7 +1,9 @@
+import CoinInfo from './_component/CoinInfo'
+
 export default function CoinPage() {
   return (
     <div className='trading-layout grid w-full'>
-      <section className='subHeader'>서브헤더</section>
+      <CoinInfo />
       <section className='max-1023:hidden market '>마켓</section>
       <section className='mobile:hidden orderBook'>오더북</section>
       <section className='orderForm'>오더폼</section>
