@@ -1,4 +1,5 @@
 'use client'
+import StarIcon from '@/components/icon/Star'
 import React from 'react'
 
 export default function CoinInfo() {
@@ -22,7 +23,9 @@ export default function CoinInfo() {
         <div className='flex items-center mobile:flex-col mobile:items-start mobile:flex-[1_1_0%]'>
           <div className='flex'>
             <div className='flex items-center'>
-              <div className='w-[24px] h-[24px] bg-white mr-[8px] rounded-lg'></div>
+              <div className='text-disabledText border-disabledText w-[24px] h-[24px] border mr-[8px] rounded-lg flex justify-center items-center'>
+                <StarIcon size={16} />
+              </div>
               <div className='flex flex-col mr-[16px] mobile:flex-row mobile:justify-center'>
                 <h1 className='text-lg font-bold mobile:text-mobile-lg mobile:leading-[24px]'>
                   BTC{isMobile && <br />}
