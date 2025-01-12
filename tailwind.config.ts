@@ -10,8 +10,9 @@ export default {
     extend: {
       screens: {
         mobile: { max: '767px' },
-        tablet: { min: '768px', max: '1023px' },
-        pc: { min: '1024px' },
+        'max-1023': { max: '1023px' }, // 1023px 이하
+        tablet: { min: '768px', max: '1200px' },
+        pc: { min: '1201px' },
       },
       fontFamily: {
         sans: ['BinancePlex', 'Arial', 'sans-serif'], // 기본 sans 계열 폰트에 추가

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Head from 'next/head'
+import Navbar from '@/components/navbar/Navbar'
 
 export const metadata: Metadata = {
   title: 'Kronon Labs Frontend Recruitment Task',
@@ -17,8 +18,8 @@ export default function RootLayout({
       <Head>
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </Head>
-      <body>
-        <header>헤더</header>
+      <body className='bg-tradeBg'>
+        <Navbar />
         <nav></nav>
         <main>{children}</main>
       </body>
