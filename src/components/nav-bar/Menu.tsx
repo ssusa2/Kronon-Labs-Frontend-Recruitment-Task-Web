@@ -11,7 +11,7 @@ export default function Menu() {
     { label: 'Markets', hasDropdown: false },
     { label: 'Trade', hasDropdown: true },
     { label: 'Futures', hasDropdown: true },
-    { label: 'Earn', hasDropdown: true },
+    { label: 'Earn', hasDropdown: false },
     { label: 'Square', hasDropdown: true },
     { label: 'More', hasDropdown: true },
   ]
