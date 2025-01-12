@@ -54,6 +54,9 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   font-family: 'BinancePlex', Arial, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .header-right-item {
@@ -62,4 +65,103 @@ body {
 
 .h-center {
   @apply flex items-center justify-center;
+}
+
+.trading-layout {
+  grid-template-areas:
+    'left subHeader subHeader market right'
+    'left orderBook chart market right'
+    'left orderBook chart trades right'
+    'left orderBook orderForm trades right'
+    'left orderBook orderForm marketActivity right'
+    'left basicTable basicTable basicTable right'
+    'footer footer footer footer footer';
+  gap: 4px;
+  grid-template-columns:
+    1fr minmax(253px, 320px) minmax(510px, 880px) minmax(253px, 320px)
+    1fr;
+  grid-template-rows: 56px 360px 160px minmax(169px, 1fr) minmax(146px, auto) 560px 24px;
+}
+
+@screen max-1023 {
+  .trading-layout {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    display: grid;
+    width: 100%;
+    height: 100vh;
+    min-height: 1088px;
+    border-top: none;
+
+    grid-template:
+      'subHeader subHeader subHeader' minmax(64px, auto)
+      'chart chart orderForm' minmax(300px, 387px)
+      'trades orderBook orderForm' 1.15fr
+      'basicTable basicTable orderForm' 1fr
+      'footer footer footer' 24px / 1fr 1fr 1fr;
+  }
+}
+
+@screen mobile {
+  .trading-layout {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    display: grid;
+    width: 100%;
+    height: auto;
+    min-height: 930px;
+    border-top: none;
+    grid-template:
+      'subHeader' minmax(150px, auto)
+      'chart' 405px
+      'basicTable' 1fr
+      'orderForm' 72px / 100%;
+  }
+}
+
+.trading-layout > section {
+  @apply bg-slate-100;
+}
+
+.left {
+  grid-area: left;
+  background: #000;
+}
+
+.right {
+  grid-area: right;
+}
+
+.chart {
+  grid-area: chart;
+}
+
+.orderBook {
+  grid-area: orderBook;
+}
+
+.orderForm {
+  grid-area: orderForm;
+}
+
+.trades {
+  grid-area: trades;
+}
+
+.market {
+  grid-area: market;
+}
+.subHeader {
+  grid-area: subHeader;
+}
+.marketActivity {
+  grid-area: marketActivity;
+}
+.basicTable {
+  grid-area: basicTable;
+}
+.footer {
+  grid-area: footer;
 }
