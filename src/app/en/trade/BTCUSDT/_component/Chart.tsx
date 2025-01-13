@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ApexOptions } from 'apexcharts'
 import Tabs from '@/components/tabs/Tabs'
 const tabs = [
@@ -55,6 +55,16 @@ function generateCandleStickData(days = 60) {
 const candleStickData = generateCandleStickData(60)
 
 export default function Chart() {
+  const [isTablet, setIsTablet] = useState(false)
+  useEffect(() => {
+    // 브라우저 환경에서만 실행
+    const checkMobile = () => setIsTablet(window.innerWidth < 1024)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   const [state, setState] = useState({
     series: [
       {
@@ -63,12 +73,19 @@ export default function Chart() {
       },
     ],
     options: {
+      plotOptions: {
+        candlestick: {
+          colors: {
+            upward: '#0ECB81',
+            downward: '#F6465D',
+          },
+        },
+      },
       chart: {
         toolbar: {
           show: false,
         },
         type: 'candlestick',
-        height: 774,
       },
       tooltip: {
         enabled: true,
@@ -236,7 +253,7 @@ export default function Chart() {
           type='candlestick'
           series={state.series}
           options={state.options}
-          height={442}
+          height={isTablet ? 305 : 442} //305 // 442
         />
       </div>
     </section>

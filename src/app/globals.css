@@ -81,10 +81,10 @@ body {
     height: 100vh;
     min-height: 1088px;
     border-top: none;
-
+    overflow: hidden;
     grid-template:
       'subHeader subHeader subHeader' minmax(64px, auto)
-      'chart chart orderForm' minmax(300px, 387px)
+      'chart chart orderForm' minmax(387px, 387px)
       'trades orderBook orderForm' 1.15fr
       'basicTable basicTable orderForm' 1fr
       'footer footer footer' 24px / 1fr 1fr 1fr;
@@ -101,6 +101,7 @@ body {
     height: auto;
     min-height: 930px;
     border-top: none;
+    overflow: hidden;
     grid-template:
       'subHeader' minmax(150px, auto)
       'chart' 405px
@@ -256,4 +257,53 @@ body {
 
 .active {
   @apply text-primaryText;
+}
+
+.order-book-progress {
+  @apply px-[16px];
+}
+
+.order-book-header {
+  @apply flex justify-between mx-[16px] mt-[12px] mb-[4px];
+}
+.icon-container {
+  @apply flex gap-[12px] items-center;
+}
+
+.progress-container {
+  @apply flex-row flex flex-[1_1] h-[20px] overflow-hidden;
+}
+
+.row-content {
+  @apply cursor-pointer flex leading-[20px] w-full;
+}
+.ask-light {
+  @apply text-xsmall flex-[1_1_0] text-textSell text-left;
+}
+.bid-light {
+  @apply text-xsmall flex-[1_1_0] text-textBuy text-left;
+}
+
+.text {
+  @apply text-right text-primaryText text-xsmall ml-[4px] cursor-pointer flex-[1_1];
+}
+
+.status-sell {
+  @apply text-textSell;
+}
+
+.status-buy {
+  @apply text-textBuy;
+}
+.order-percent-container {
+  @apply flex;
+}
+.order-kind {
+  @apply text-xsmall text-primaryText;
+}
+.order-percent {
+  @apply text-xsmall;
+}
+.bar {
+  @apply w-full h-[4px];
 }
