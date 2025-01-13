@@ -218,3 +218,42 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
+
+.apexcharts-tooltip {
+  background: #f3f3f3;
+  color: orange;
+}
+
+.apexcharts-yaxistooltip {
+  background: #474d57 !important;
+  color: #ffffff !important;
+  border-radius: 4px !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.apexcharts-yaxistooltip::after,
+.apexcharts-yaxistooltip::before {
+  display: none !important;
+}
+
+.apexcharts-xaxistooltip {
+  background: #474d57 !important;
+  color: #ffffff !important;
+  border-radius: 4px !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.apexcharts-xaxistooltip::after,
+.apexcharts-xaxistooltip::before {
+  display: none !important;
+}
+
+.chart-control-btn {
+  @apply text-xsmall text-disabledText leading-[18px] px-[1px] whitespace-nowrap font-[600] cursor-pointer;
+}
+
+.active {
+  @apply text-primaryText;
+}
