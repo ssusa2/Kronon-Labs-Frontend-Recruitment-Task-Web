@@ -15,7 +15,6 @@ export default function Button({
   disabled = false,
   variant = 'primary',
 }: ButtonProps) {
-  console.log('className', className)
   return (
     <button
       type={type}

@@ -1,4 +1,5 @@
-import CoinInfo from './_component/CoinInfo'
+import CoinInfo from '@/app/en/trade/BTCUSDT/_component/CoinInfo'
+import Chart from '@/app/en/trade/BTCUSDT/_component/Chart'
 
 export default function CoinPage() {
   return (
@@ -8,7 +9,7 @@ export default function CoinPage() {
       <section className='mobile:hidden orderBook'>오더북</section>
       <section className='orderForm'>오더폼</section>
       <section className='mobile:hidden trades '>트레이드</section>
-      <section className='chart'>차트</section>
+      <Chart />
       <section className='max-1023:hidden marketActivity '>
         마켓액티비티
       </section>

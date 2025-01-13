@@ -14,8 +14,6 @@ export default function CoinInfo() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  console.log('isMobile', isMobile)
-
   return (
     <section className='subHeader card-ui'>
       <div className='text-white px-4 mobile:py-[12px] mobile:px-[16px] flex items-center mobile:items-start'>
