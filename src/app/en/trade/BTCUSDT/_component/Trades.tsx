@@ -1,5 +1,8 @@
+'use client'
+
 import MoreIcon from '@/components/icon/More'
 import Tabs from '@/components/tabs/Tabs'
+import { useEffect, useState } from 'react'
 
 const tabs = [
   {
@@ -12,6 +15,15 @@ const tabs = [
   },
 ]
 export default function Trades() {
+  const [isTablet, setIsTablet] = useState(false)
+  useEffect(() => {
+    // 브라우저 환경에서만 실행
+    const checkMobile = () => setIsTablet(window.innerWidth < 1024)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
   function generateRandomData(count = 17) {
     const data = []
 
@@ -60,7 +72,10 @@ export default function Trades() {
           </div>
         </div>
         <div className='list-container flex flex-col grow'>
-          <div className='overflow-auto h-[301px] scrollbar-hide'>
+          <div
+            className={`overflow-auto scrollbar-hide
+          ${isTablet ? 'h-[200px]' : 'h-[261px]'}`}
+          >
             <div className='h-[9360px]'>
               <div className='order-list-container'>
                 {randomData.map((el, index) => {
