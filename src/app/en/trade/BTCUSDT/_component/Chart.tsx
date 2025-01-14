@@ -255,10 +255,23 @@ export default function Chart() {
             yaxis: [
               {
                 y: candleStickData[candleStickData.length - 1]?.y[3], // 최신 Close 값
+                y2: null,
+                borderColor: 'transparent',
+
                 label: {
+                  position: 'right',
+
+                  offsetX: 65,
+                  borderColor: '#FF4560',
+                  style: {
+                    color: '#fff',
+                    background: '#FF4560',
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                  },
                   text: `${candleStickData[
                     candleStickData.length - 1
-                  ]?.y[3].toFixed(2)}`,
+                  ]?.y[3].toFixed(2)}`, // 최신 Close 값 표시
                 },
               },
             ],
