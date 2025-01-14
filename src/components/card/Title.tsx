@@ -2,11 +2,10 @@
 
 interface TitleProps {
   text: string
-  subtitle?: string
   actionButton?: React.ReactNode
 }
 
-export default function Title({ text, subtitle, actionButton }: TitleProps) {
+export default function Title({ text, actionButton }: TitleProps) {
   return (
     <div className='tabs min-h-[42px] h-[42px] border-b border-line flex items-center px-[16px] justify-between '>
       <div className='tab-header flex'>
