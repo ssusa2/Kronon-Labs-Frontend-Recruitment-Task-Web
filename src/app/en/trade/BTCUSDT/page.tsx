@@ -3,8 +3,10 @@ import Chart from '@/app/en/trade/BTCUSDT/_component/Chart'
 import OrderBook from '@/app/en/trade/BTCUSDT/_component/OrderBook'
 import SearchCoin from '@/app/en/trade/BTCUSDT/_component/SearchCoin'
 import OrderForm from '@/app/en/trade/BTCUSDT/_component/OrderForm'
+import MobileOrderForm from '@/app/en/trade/BTCUSDT/_component/MobileOrderForm'
 import Trades from '@/app/en/trade/BTCUSDT/_component/Trades'
 import MarketActivity from '@/app/en/trade/BTCUSDT/_component/MarketActivity'
+import BasicTable from '@/app/en/trade/BTCUSDT/_component/BasicTable'
 
 export default function CoinPage() {
   return (
@@ -13,12 +15,13 @@ export default function CoinPage() {
       <SearchCoin />
       <OrderBook />
       <OrderForm />
+      <MobileOrderForm />
       <Trades />
       <Chart />
       <MarketActivity />
+      <BasicTable />
 
-      <section className='basicTable'>베이직테이블</section>
-      <section className='mobile:hidden footer '>푸터</section>
+      {/* <section className='mobile:hidden footer '>푸터</section> */}
       <section className='hidden left'></section>
       <section className='hidden right'></section>
     </div>

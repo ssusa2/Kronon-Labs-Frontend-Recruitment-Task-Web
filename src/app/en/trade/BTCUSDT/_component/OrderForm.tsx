@@ -52,7 +52,7 @@ export default function OrderForm() {
   }
 
   return (
-    <section className='orderForm !bg-basicBg card-ui w-full'>
+    <section className='orderForm !bg-basicBg card-ui w-full mobile:hidden'>
       <Tabs tabs={tabs} />
       {isTablet && (
         <div className='buy-sell-tabs pt-[10px] px-[16px]'>
