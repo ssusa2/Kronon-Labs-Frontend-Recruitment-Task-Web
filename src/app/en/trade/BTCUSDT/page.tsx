@@ -3,6 +3,7 @@ import Chart from '@/app/en/trade/BTCUSDT/_component/Chart'
 import OrderBook from '@/app/en/trade/BTCUSDT/_component/OrderBook'
 import SearchCoin from '@/app/en/trade/BTCUSDT/_component/SearchCoin'
 import OrderForm from '@/app/en/trade/BTCUSDT/_component/OrderForm'
+import Trades from '@/app/en/trade/BTCUSDT/_component/Trades'
 
 export default function CoinPage() {
   return (
@@ -11,8 +12,7 @@ export default function CoinPage() {
       <SearchCoin />
       <OrderBook />
       <OrderForm />
-
-      <section className='mobile:hidden trades'>trades</section>
+      <Trades />
       <Chart />
       <section className='max-1023:hidden marketActivity '>
         마켓액티비티
