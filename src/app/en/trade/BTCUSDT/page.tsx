@@ -1,12 +1,13 @@
 import CoinInfo from '@/app/en/trade/BTCUSDT/_component/CoinInfo'
 import Chart from '@/app/en/trade/BTCUSDT/_component/Chart'
 import OrderBook from '@/app/en/trade/BTCUSDT/_component/OrderBook'
+import SearchCoin from '@/app/en/trade/BTCUSDT/_component/SearchCoin'
 
 export default function CoinPage() {
   return (
     <div className='trading-layout grid w-full'>
       <CoinInfo />
-      <section className='max-1023:hidden market '>마켓</section>
+      <SearchCoin />
       <OrderBook />
       <section className='orderForm'>오더폼</section>
       <section className='mobile:hidden trades '>트레이드</section>

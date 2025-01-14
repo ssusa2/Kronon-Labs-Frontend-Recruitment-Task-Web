@@ -16,7 +16,7 @@ export default function Tabs({ tabs, actionButton }: TabsProps) {
   const [activeTab, setActiveTab] = useState(0)
 
   return (
-    <div className='tabs min-h-[42px] h-[42px] border-b border-line flex items-center px-[16px] justify-between '>
+    <div className='tabs min-h-[42px] h-[42px] border-b border-line flex items-center px-[16px] justify-between scrollbar scrollbar-hide '>
       {/* 탭 헤더 */}
       <div className='tab-header flex gap-[24px] h-full'>
         {tabs.map((tab, index) => (
