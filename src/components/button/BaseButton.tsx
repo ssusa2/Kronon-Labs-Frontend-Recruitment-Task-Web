@@ -4,7 +4,7 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset' // 버튼 타입
   className?: string // Tailwind 클래스를 추가로 전달받을 수 있음
   disabled?: boolean // 비활성화 여부
-  variant?: 'primary' | 'secondary' // 버튼 스타일
+  variant?: 'primary' | 'secondary' | 'buy' | 'sell' // 버튼 스타일
 }
 
 export default function Button({
@@ -24,8 +24,12 @@ export default function Button({
       ${
         variant === 'primary'
           ? 'bg-btnBg text-textOnYellow'
-          : 'bg-bg3 text-primaryText'
-      } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}${className}`}
+          : variant === 'secondary'
+          ? 'bg-bg3 text-primaryText'
+          : variant === 'buy'
+          ? 'bg-buy text-white'
+          : 'bg-sell text-white'
+      } ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
     >
       {children}
     </button>
