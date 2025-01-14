@@ -1,3 +1,5 @@
+'use client'
+
 import CoinInfo from '@/app/en/trade/BTCUSDT/_component/CoinInfo'
 import Chart from '@/app/en/trade/BTCUSDT/_component/Chart'
 import OrderBook from '@/app/en/trade/BTCUSDT/_component/OrderBook'
@@ -7,14 +9,17 @@ import MobileOrderForm from '@/app/en/trade/BTCUSDT/_component/MobileOrderForm'
 import Trades from '@/app/en/trade/BTCUSDT/_component/Trades'
 import MarketActivity from '@/app/en/trade/BTCUSDT/_component/MarketActivity'
 import BasicTable from '@/app/en/trade/BTCUSDT/_component/BasicTable'
+import { OrderBookProvider } from '@/lib/Context'
 
 export default function CoinPage() {
   return (
     <div className='trading-layout grid w-full'>
       <CoinInfo />
       <SearchCoin />
-      <OrderBook />
-      <OrderForm />
+      <OrderBookProvider>
+        <OrderBook />
+        <OrderForm />
+      </OrderBookProvider>
       <MobileOrderForm />
       <Trades />
       <Chart />

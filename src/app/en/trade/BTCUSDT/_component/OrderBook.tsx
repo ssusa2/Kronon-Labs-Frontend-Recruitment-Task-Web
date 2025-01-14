@@ -1,4 +1,5 @@
 'use client'
+
 import Title from '@/components/card/Title'
 import BuyOrderIcon from '@/components/icon/BuyOrder'
 import SellOrderIcon from '@/components/icon/SellOrder'
@@ -8,15 +9,26 @@ import MoreIcon from '@/components/icon/More'
 import DownArrowIcon from '@/components/icon/DownArrow'
 import MoreArrowIcon from '@/components/icon/MoreArrow'
 import BuySellArrowIcon from '@/components/icon/BuySellArrow'
+import { useOrderBook } from '@/lib/Context'
+
+export interface OrderBookItemType {
+  price: number
+  amount: number
+  total: number
+}
 
 export default function OrderBook() {
+  const [isTablet, setIsTablet] = useState(false)
+  const [randomData, setRandomData] = useState<OrderBookItemType[]>([])
+  const { setSelectedOrderBook } = useOrderBook()
+
   /**
    *
    * @param count pc :17 | tablet: 3
    * @returns
    */
   function generateRandomData(count = 17) {
-    const data = []
+    const data: OrderBookItemType[] = []
 
     for (let i = 0; i < count; i++) {
       const price = parseFloat(
@@ -37,7 +49,10 @@ export default function OrderBook() {
     return data
   }
 
-  const [isTablet, setIsTablet] = useState(false)
+  useEffect(() => {
+    setRandomData(generateRandomData(isTablet ? 3 : 17))
+  }, [isTablet])
+
   useEffect(() => {
     // 브라우저 환경에서만 실행
     const checkMobile = () => setIsTablet(window.innerWidth < 1024)
@@ -46,7 +61,6 @@ export default function OrderBook() {
 
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
-  const randomData = generateRandomData(isTablet ? 3 : 17)
 
   return (
     <section className='orderBook mobile:hidden !bg-basicBg card-ui orderBook'>
@@ -88,7 +102,11 @@ export default function OrderBook() {
         <div className='order-list-container'>
           {randomData.map((el, index) => {
             return (
-              <div key={index} className='order-book-progress hover:font-[600]'>
+              <div
+                key={`${el.price}-${index}`}
+                className='order-book-progress hover:font-[600]'
+                onClick={() => setSelectedOrderBook(el)}
+              >
                 <div className='progress-container'>
                   <div className='row-content'>
                     <div className='ask-light'>{el.price.toFixed(2)}</div>
@@ -113,7 +131,11 @@ export default function OrderBook() {
           </div>
           {randomData.map((el, index) => {
             return (
-              <div key={index} className='order-book-progress hover:font-[600]'>
+              <div
+                key={`${el.price}-${index}`}
+                className='order-book-progress hover:font-[600]'
+                onClick={() => setSelectedOrderBook(el)}
+              >
                 <div className='progress-container'>
                   <div className='row-content'>
                     <div className='bid-light'>{el.price.toFixed(2)}</div>

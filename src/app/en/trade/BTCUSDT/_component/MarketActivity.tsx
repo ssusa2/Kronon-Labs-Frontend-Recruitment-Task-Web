@@ -1,7 +1,10 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Title from '@/components/card/Title'
 import DoubleDropDown from '@/components/icon/DoubleDropDown'
 
-interface marketActivityItemType {
+interface MarketActivityItemType {
   coinName: string
   time: string
   moveKind:
@@ -16,16 +19,16 @@ interface marketActivityItemType {
 
 function generateRandomMarketActivityData(
   count: number
-): marketActivityItemType[] {
+): MarketActivityItemType[] {
   const coinNames = ['BTC', 'ETH', 'XRP', 'ADA', 'SOL', 'BNB', 'DOGE', 'DOT']
-  const moveKinds: marketActivityItemType['moveKind'][] = [
+  const moveKinds: MarketActivityItemType['moveKind'][] = [
     'New 24hr High',
     '[Mid] 5min Rise',
     '[Small] 2hr Rise',
     'Rally',
     'Pullback',
   ]
-  const iconTypes: marketActivityItemType['iconType'][] = [
+  const iconTypes: MarketActivityItemType['iconType'][] = [
     'New',
     'Mid',
     'Small',
@@ -33,66 +36,55 @@ function generateRandomMarketActivityData(
     'Pullback',
   ]
 
-  const data: marketActivityItemType[] = []
-
-  for (let i = 0; i < count; i++) {
-    const coinName = coinNames[Math.floor(Math.random() * coinNames.length)]
-    const time = new Date(Date.now() - Math.floor(Math.random() * 3600000)) // 현재 시간에서 최대 1시간 전까지
+  return Array.from({ length: count }, () => ({
+    coinName: coinNames[Math.floor(Math.random() * coinNames.length)],
+    time: new Date(Date.now() - Math.floor(Math.random() * 3600000))
       .toISOString()
-      .slice(11, 19) // 'HH:mm:ss' 형식
-    const moveKind = moveKinds[Math.floor(Math.random() * moveKinds.length)]
-    const percent = (Math.random() * (10 - 0.1) + 0.1).toFixed(2) + '%' // 0.1% ~ 10% 범위
-    const iconType = iconTypes[Math.floor(Math.random() * iconTypes.length)]
-
-    data.push({
-      coinName,
-      time,
-      moveKind,
-      percent,
-      iconType,
-    })
-  }
-
-  return data
+      .slice(11, 19),
+    moveKind: moveKinds[Math.floor(Math.random() * moveKinds.length)],
+    percent: `${(Math.random() * (10 - 0.1) + 0.1).toFixed(2)}`,
+    iconType: iconTypes[Math.floor(Math.random() * iconTypes.length)],
+  }))
 }
 
 export default function MarketActivity() {
-  const marketList = generateRandomMarketActivityData(50)
+  const [marketList, setMarketList] = useState<MarketActivityItemType[]>([])
+
+  useEffect(() => {
+    setMarketList(generateRandomMarketActivityData(50))
+  }, [])
 
   return (
-    <section className='max-1023:hidden marketActivity !bg-basicBg card-ui w-full'>
+    <section className='marketActivity card-ui w-full max-1023:hidden !bg-basicBg'>
       <Title
         text='Top Movers'
         actionButton={
           <DoubleDropDown className='text-iconNormal rotate-180' size={16} />
         }
       />
-      <div className='list-container px-[16px]'>
+      <div className='list-container px-4'>
         <div className='move-kind-header'></div>
-        <div className='list h-[82px] overflow-scroll scrollbar-hide'>
-          {marketList.map((el) => {
-            return (
-              <div className='row-content !bg-transparent text-xsmall py-[5px]'>
-                <div className='text-left flex-[1_1_0] leading-[16px]'>
-                  <div className='coin text-primaryText'>
-                    {el.coinName}/USDT
-                  </div>
-                  <div className='time text-tertiaryText'>{el.time}</div>
-                </div>
-                <div className='center text-end flex-[1_1_0] min-w-[96px] leading-[16px]'>
-                  <div className='percent text-buy'>+{el.percent}%</div>
-                  <div className='move-kind text-tertiaryText'>
-                    {el.moveKind}
-                  </div>
-                </div>
-                <div className='w-[56px] flex flex-end justify-center items-center'>
-                  <div className='h-[16px] w-[40px] bg-buy rounded-[4px] flex justify-center items-center'>
-                    ---
-                  </div>
+        <div className='list h-[82px] overflow-y-scroll scrollbar-hide'>
+          {marketList.map((el, index) => (
+            <div
+              key={`${el.coinName}-${index}`}
+              className='row-content py-1 text-xsmall !bg-transparent flex items-center'
+            >
+              <div className='flex-[1_1_0] text-left'>
+                <div className='coin text-primaryText'>{el.coinName}/USDT</div>
+                <div className='time text-tertiaryText'>{el.time}</div>
+              </div>
+              <div className='flex-[1_1_0] text-end min-w-[96px]'>
+                <div className='percent text-buy'>+{el.percent}%</div>
+                <div className='move-kind text-tertiaryText'>{el.moveKind}</div>
+              </div>
+              <div className='w-14 flex justify-center items-center'>
+                <div className='h-4 w-10 bg-buy rounded flex justify-center items-center'>
+                  ---
                 </div>
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>

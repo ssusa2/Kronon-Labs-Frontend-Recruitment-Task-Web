@@ -17,19 +17,17 @@ export default function Menu() {
   ]
 
   return (
-    <ul className=' flex max-1023:hidden text-sm'>
+    <ul className='flex max-1023:hidden text-sm'>
       {menuItems.map((item) => (
-        <>
-          <li
-            key={`${item}`}
-            className='group hover:text-textBrand cursor-pointer flex items-center text-small leading-[22px] font-[500]	px-[12px]'
-          >
-            {item.label}
-            {item.hasDropdown && (
-              <DropDownIcon size={16} className='group-hover:rotate-180' />
-            )}
-          </li>
-        </>
+        <li
+          key={item.label}
+          className='group hover:text-textBrand cursor-pointer flex items-center text-small leading-[22px] font-[500]	px-[12px]'
+        >
+          {item.label}
+          {item.hasDropdown && (
+            <DropDownIcon size={16} className='group-hover:rotate-180' />
+          )}
+        </li>
       ))}
     </ul>
   )
