@@ -44,7 +44,17 @@ body {
   margin: 0;
   padding: 0;
 }
+html,
+body {
+  overflow: auto; /* 스크롤 기능 유지 */
+  -ms-overflow-style: none; /* IE 및 Edge */
+  scrollbar-width: none; /* Firefox */
+}
 
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
 .header-right-item {
   @apply flex relative p-[20px_8px] items-center;
 }
@@ -52,10 +62,18 @@ body {
 .h-center {
   @apply flex items-center justify-center;
 }
-
 .trading-layout {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: grid;
+  width: 100vw;
   border-top-width: 4px;
   border-color: #0b0e11;
+  overflow: hidden;
+  gap: 4px;
+
+  /* 기본 데스크톱 스타일 */
   grid-template-areas:
     'left subHeader subHeader market right'
     'left orderBook chart market right'
@@ -64,52 +82,47 @@ body {
     'left orderBook orderForm marketActivity right'
     'left basicTable basicTable basicTable right'
     'footer footer footer footer footer';
-  gap: 4px;
   grid-template-columns:
     1fr minmax(253px, 320px) minmax(510px, 880px) minmax(253px, 320px)
     1fr;
   grid-template-rows: 56px 360px 160px minmax(169px, 1fr) minmax(146px, auto) 560px 24px;
 }
 
-@screen max-1023 {
+@media (max-width: 1023px) {
   .trading-layout {
-    box-sizing: border-box;
-    margin: 0px;
-    min-width: 0px;
-    display: grid;
     width: 100%;
     height: 100vh;
     min-height: 1088px;
     border-top: none;
-    overflow: hidden;
-    grid-template:
-      'subHeader subHeader subHeader' minmax(64px, auto)
-      'chart chart orderForm' minmax(387px, 387px)
-      'trades orderBook orderForm' 1.15fr
-      'basicTable basicTable orderForm' 1fr
-      'footer footer footer' 24px / 1fr 1fr 1fr;
+
+    /* 태블릿 레이아웃 */
+    grid-template-areas:
+      'subHeader subHeader subHeader'
+      'chart chart orderForm'
+      'trades orderBook orderForm'
+      'basicTable basicTable orderForm'
+      'footer footer footer';
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: minmax(64px, auto) minmax(387px, 387px) 1.15fr 1fr 24px;
   }
 }
 
-@screen mobile {
+@media (max-width: 768px) {
   .trading-layout {
-    box-sizing: border-box;
-    margin: 0px;
-    min-width: 0px;
-    display: grid;
-    width: 100%;
     height: auto;
     min-height: 930px;
     border-top: none;
-    overflow: hidden;
-    grid-template:
-      'subHeader' minmax(150px, auto)
-      'chart' 405px
-      'basicTable' 1fr
-      'orderForm' 72px / 100%;
+
+    /* 모바일 레이아웃 */
+    grid-template-areas:
+      'subHeader'
+      'chart'
+      'basicTable'
+      'orderForm';
+    grid-template-columns: 100%;
+    grid-template-rows: minmax(150px, auto) 405px 1fr 72px;
   }
 }
-
 .trading-layout > section {
   @apply bg-slate-100;
 }
