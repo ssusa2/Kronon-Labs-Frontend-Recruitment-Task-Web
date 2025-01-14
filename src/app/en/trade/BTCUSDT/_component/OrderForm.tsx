@@ -3,6 +3,7 @@
 import Button from '@/components/button/BaseButton'
 import StepperInput from '@/components/input/StepperInput'
 import Tabs from '@/components/tabs/Tabs'
+import { useOrderBook } from '@/lib/Context'
 import { useEffect, useState } from 'react'
 
 const tabs = [
@@ -25,8 +26,27 @@ const tabs = [
 ]
 
 export default function OrderForm() {
+  const { selectedOrderBook } = useOrderBook()
   const [isTablet, setIsTablet] = useState(false)
   const [activeTab, setActiveTab] = useState('buy')
+  const [inputValues, setInputValues] = useState({
+    price1: '0.00074131',
+    price2: '0.00074130',
+    amount1: '7',
+    amount2: '3',
+  })
+
+  useEffect(() => {
+    // selectedOrderBook 값이 변경될 때 inputValues 업데이트
+    if (selectedOrderBook) {
+      setInputValues((prev) => ({
+        ...prev,
+        price1: selectedOrderBook.price.toFixed(5),
+        price2: selectedOrderBook.price.toFixed(5),
+        amount2: selectedOrderBook.amount.toFixed(5),
+      }))
+    }
+  }, [selectedOrderBook])
 
   useEffect(() => {
     // 브라우저 환경에서만 실행
@@ -36,13 +56,6 @@ export default function OrderForm() {
 
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
-
-  const [inputValues, setInputValues] = useState({
-    price1: '0.00074131',
-    price2: '0.00074130',
-    amount1: '7',
-    amount2: '3',
-  })
 
   const handleChange = (key: string, value: string) => {
     setInputValues((prev) => ({

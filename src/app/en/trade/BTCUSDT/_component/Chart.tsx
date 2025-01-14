@@ -26,8 +26,7 @@ const tabs = [
 const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 })
-
-function generateCandleStickData(days = 60) {
+function generateCandleStickData(days = 60): { x: Date; y: number[] }[] {
   const data = []
   const startDate = new Date() // 오늘 날짜 기준
   startDate.setDate(startDate.getDate() - days)
@@ -52,10 +51,18 @@ function generateCandleStickData(days = 60) {
   return data
 }
 
-const candleStickData = generateCandleStickData(60)
-
 export default function Chart() {
   const [isTablet, setIsTablet] = useState(false)
+
+  const [candleStickData, setCandleStickData] = useState<
+    { x: Date; y: number[] }[]
+  >([])
+
+  useEffect(() => {
+    const data = generateCandleStickData(60)
+    setCandleStickData(data)
+  }, [])
+
   useEffect(() => {
     // 브라우저 환경에서만 실행
     const checkMobile = () => setIsTablet(window.innerWidth < 1024)
@@ -65,11 +72,14 @@ export default function Chart() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  const [state, setState] = useState({
+  const [state, setState] = useState<{
+    series: { name: string; data: { x: Date; y: number[] }[] }[]
+    options: ApexOptions
+  }>({
     series: [
       {
         name: 'CandleStick Data',
-        data: [...candleStickData],
+        data: [],
       },
     ],
     options: {
@@ -204,7 +214,7 @@ export default function Chart() {
       annotations: {
         yaxis: [
           {
-            y: candleStickData[candleStickData.length - 1].y[3], // 최신 Close 값
+            y: candleStickData[candleStickData.length - 1]?.y[3], // 최신 Close 값
             y2: null,
             borderColor: 'transparent',
 
@@ -219,15 +229,44 @@ export default function Chart() {
                 fontSize: '12px',
                 fontWeight: 'bold',
               },
-              text: `${candleStickData[candleStickData.length - 1].y[3].toFixed(
-                2
-              )}`, // 최신 Close 값 표시
+              text: `${candleStickData[
+                candleStickData.length - 1
+              ]?.y[3].toFixed(2)}`, // 최신 Close 값 표시
             },
           },
         ],
       },
     } as ApexOptions,
   })
+
+  useEffect(() => {
+    if (candleStickData.length > 0) {
+      setState((prevState) => ({
+        ...prevState,
+        series: [
+          {
+            name: 'CandleStick Data',
+            data: candleStickData,
+          },
+        ],
+        options: {
+          ...prevState.options,
+          annotations: {
+            yaxis: [
+              {
+                y: candleStickData[candleStickData.length - 1]?.y[3], // 최신 Close 값
+                label: {
+                  text: `${candleStickData[
+                    candleStickData.length - 1
+                  ]?.y[3].toFixed(2)}`,
+                },
+              },
+            ],
+          },
+        },
+      }))
+    }
+  }, [candleStickData])
 
   return (
     <section className='chart !bg-basicBg card-ui'>
