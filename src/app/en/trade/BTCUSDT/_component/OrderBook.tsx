@@ -10,6 +10,7 @@ import DownArrowIcon from '@/components/icon/DownArrow'
 import MoreArrowIcon from '@/components/icon/MoreArrow'
 import BuySellArrowIcon from '@/components/icon/BuySellArrow'
 import { useOrderBook } from '@/lib/Context'
+import { useScreenSizeCheck } from '@/hooks/useScreenSize'
 
 export interface OrderBookItemType {
   price: number
@@ -18,7 +19,8 @@ export interface OrderBookItemType {
 }
 
 export default function OrderBook() {
-  const [isTablet, setIsTablet] = useState(false)
+  const isTablet = useScreenSizeCheck(1024)
+
   const [randomData, setRandomData] = useState<OrderBookItemType[]>([])
   const { setSelectedOrderBook } = useOrderBook()
 
@@ -52,15 +54,6 @@ export default function OrderBook() {
   useEffect(() => {
     setRandomData(generateRandomData(isTablet ? 3 : 17))
   }, [isTablet])
-
-  useEffect(() => {
-    // 브라우저 환경에서만 실행
-    const checkMobile = () => setIsTablet(window.innerWidth < 1024)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
 
   return (
     <section className='orderBook mobile:hidden !bg-basicBg card-ui orderBook'>

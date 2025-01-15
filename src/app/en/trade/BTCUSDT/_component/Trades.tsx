@@ -2,6 +2,7 @@
 
 import MoreIcon from '@/components/icon/More'
 import Tabs from '@/components/tabs/Tabs'
+import { useScreenSizeCheck } from '@/hooks/useScreenSize'
 import { useEffect, useState } from 'react'
 
 const tabs = [
@@ -16,18 +17,11 @@ const tabs = [
 ]
 
 export default function Trades() {
-  const [isTablet, setIsTablet] = useState(false)
+  const isTablet = useScreenSizeCheck(1024)
+
   const [randomData, setRandomData] = useState<
     { price: number; amount: number; time: string }[]
   >([])
-
-  useEffect(() => {
-    const checkMobile = () => setIsTablet(window.innerWidth < 1024)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
 
   useEffect(() => {
     setRandomData(generateRandomData(500))
@@ -60,7 +54,7 @@ export default function Trades() {
             <div className='item flex items-center justify-start flex-[1_1_0]'>
               Price (USDT)
             </div>
-            <div className='item text-right flex justify-end flex-[1_1_0]'>
+            <div className='item text-rights flex justify-end flex-[1_1_0]'>
               Amount (BTC)
             </div>
             <div className='item flex items-center justify-end flex-[1_1_0]'>

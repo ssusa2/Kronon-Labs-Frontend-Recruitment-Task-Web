@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import { ApexOptions } from 'apexcharts'
 import Tabs from '@/components/tabs/Tabs'
+import { useScreenSizeCheck } from '@/hooks/useScreenSize'
 const tabs = [
   {
     label: 'Chart',
@@ -52,7 +53,7 @@ function generateCandleStickData(days = 60): { x: Date; y: number[] }[] {
 }
 
 export default function Chart() {
-  const [isTablet, setIsTablet] = useState(false)
+  const isTablet = useScreenSizeCheck(1024)
 
   const [candleStickData, setCandleStickData] = useState<
     { x: Date; y: number[] }[]
@@ -61,15 +62,6 @@ export default function Chart() {
   useEffect(() => {
     const data = generateCandleStickData(60)
     setCandleStickData(data)
-  }, [])
-
-  useEffect(() => {
-    // 브라우저 환경에서만 실행
-    const checkMobile = () => setIsTablet(window.innerWidth < 1024)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-
-    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   const [state, setState] = useState<{

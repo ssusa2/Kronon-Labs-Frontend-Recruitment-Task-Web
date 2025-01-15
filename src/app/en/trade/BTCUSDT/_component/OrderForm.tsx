@@ -3,6 +3,7 @@
 import Button from '@/components/button/BaseButton'
 import StepperInput from '@/components/input/StepperInput'
 import Tabs from '@/components/tabs/Tabs'
+import { useScreenSizeCheck } from '@/hooks/useScreenSize'
 import { useOrderBook } from '@/lib/Context'
 import { useEffect, useState } from 'react'
 
@@ -27,7 +28,7 @@ const tabs = [
 
 export default function OrderForm() {
   const { selectedOrderBook } = useOrderBook()
-  const [isTablet, setIsTablet] = useState(false)
+  const isTablet = useScreenSizeCheck(1024)
   const [activeTab, setActiveTab] = useState('buy')
   const [inputValues, setInputValues] = useState({
     price1: '0.00074131',
@@ -47,15 +48,6 @@ export default function OrderForm() {
       }))
     }
   }, [selectedOrderBook])
-
-  useEffect(() => {
-    // 브라우저 환경에서만 실행
-    const checkMobile = () => setIsTablet(window.innerWidth < 1024)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
 
   const handleChange = (key: string, value: string) => {
     setInputValues((prev) => ({
