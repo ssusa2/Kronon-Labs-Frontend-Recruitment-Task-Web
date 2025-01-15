@@ -2,7 +2,7 @@ import Button from '@/components/button/BaseButton'
 
 export default function MobileOrderForm() {
   return (
-    <div className='!bg-basicBg fixed w-full bottom-0 hidden mobile:block'>
+    <div className='!bg-basicBg fixed w-full bottom-0 hidden mobile:block z-50'>
       <div className='p-[16px] gap-[16px] w-full flex'>
         <Button
           variant='buy'
