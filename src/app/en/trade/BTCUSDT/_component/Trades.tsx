@@ -30,7 +30,12 @@ export default function Trades() {
 
   return (
     <section className='mobile:hidden trades !bg-basicBg card-ui'>
-      <Tabs tabs={tabs} actionButton={<MoreIcon size={16} />} />
+      <Tabs
+        tabs={tabs}
+        actionButton={
+          <MoreIcon size={16} className='text-iconNormal icon-hover' />
+        }
+      />
       <div className='over-book-container'>
         <div className='order-book-tb-header flex flex-col mx-4 mb-1 mt-2'>
           <div className='content flex min-h-[20px] justify-between text-xsmall text-tertiaryText'>
@@ -59,7 +64,7 @@ export default function Trades() {
                 <div className='progress-container'>
                   <div className='row-content'>
                     <div
-                      className={`text ${
+                      className={`text !text-start ${
                         index % 2 === 0 ? 'ask-light' : 'bid-light'
                       }`}
                     >

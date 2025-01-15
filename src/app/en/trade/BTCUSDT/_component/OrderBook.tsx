@@ -29,7 +29,7 @@ export default function OrderBook() {
       <Title
         text='Order Book'
         actionButton={
-          <div className='text-disabledText hover:text-primaryText cursor-pointer'>
+          <div className='text-disabledText icon-hover'>
             <MoreIcon size={16} />
           </div>
         }
@@ -87,7 +87,7 @@ export default function OrderBook() {
             <div className='mark-price text-tertiaryText flex flex-[1_1] text-left text-xsmall'>
               $91,240.04
             </div>
-            <div className='more w-[16px] h-[16px] text-disabledText hover:text-primaryText'>
+            <div className='more w-[16px] h-[16px] text-disabledText icon-hover'>
               <MoreArrowIcon size={16} />
             </div>
           </div>

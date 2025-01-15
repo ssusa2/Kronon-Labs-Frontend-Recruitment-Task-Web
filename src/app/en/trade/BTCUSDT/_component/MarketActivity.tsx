@@ -18,7 +18,10 @@ export default function MarketActivity() {
       <Title
         text='Top Movers'
         actionButton={
-          <DoubleDropDown className='text-iconNormal rotate-180' size={16} />
+          <DoubleDropDown
+            className='text-iconNormal icon-hover rotate-180'
+            size={16}
+          />
         }
       />
       <div className='list-container px-4'>

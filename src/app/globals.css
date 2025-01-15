@@ -320,3 +320,7 @@ body::-webkit-scrollbar {
 .bar {
   @apply w-full h-[4px];
 }
+
+.icon-hover {
+  @apply hover:text-primaryText cursor-pointer;
+}

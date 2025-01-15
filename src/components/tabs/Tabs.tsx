@@ -23,7 +23,7 @@ export default function Tabs({ tabs, actionButton }: TabsProps) {
           <button
             key={index}
             onClick={() => setActiveTab(index)}
-            className={`tab-item text-small h-full border-b-[3px] relative ${
+            className={`tab-item text-small h-full border-b-[3px] relative hover:text-primaryText ${
               activeTab === index
                 ? "text-textPrimary border-transparent after:content-[' '] after:left-[50%] after:translate-x-[-50%]  after:absolute after:bottom-[-3px] after:mx-auto after:my-0 after:bg-textBrand after:h-[3px] after:w-[16px]"
                 : 'text-tertiaryText border-transparent	'
