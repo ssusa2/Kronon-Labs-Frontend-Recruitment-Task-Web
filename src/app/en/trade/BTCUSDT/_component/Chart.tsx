@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { ApexOptions } from 'apexcharts'
 import Tabs from '@/components/tabs/Tabs'
 import { useScreenSizeCheck } from '@/hooks/useScreenSize'
+import { generateCandleStickData } from '@/lib/dataGenerators'
 const tabs = [
   {
     label: 'Chart',
@@ -27,31 +28,6 @@ const tabs = [
 const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 })
-function generateCandleStickData(days = 60): { x: Date; y: number[] }[] {
-  const data = []
-  const startDate = new Date() // 오늘 날짜 기준
-  startDate.setDate(startDate.getDate() - days)
-
-  for (let i = 0; i < days; i++) {
-    const currentDate = new Date(startDate)
-    currentDate.setDate(startDate.getDate() + i)
-
-    const open = parseFloat((Math.random() * (15000 - 1) + 1).toFixed(2)) // 1~15000 범위
-    const close = parseFloat((Math.random() * (15000 - 1) + 1).toFixed(2)) // 1~15000 범위
-    const high =
-      Math.max(open, close) + parseFloat((Math.random() * 50).toFixed(2)) // high는 open, close보다 높아야 함
-    const low =
-      Math.min(open, close) - parseFloat((Math.random() * 50).toFixed(2)) // low는 open, close보다 낮아야 함
-
-    data.push({
-      x: currentDate,
-      y: [open, high, low, close],
-    })
-  }
-
-  return data
-}
-
 export default function Chart() {
   const isTablet = useScreenSizeCheck(1024)
 

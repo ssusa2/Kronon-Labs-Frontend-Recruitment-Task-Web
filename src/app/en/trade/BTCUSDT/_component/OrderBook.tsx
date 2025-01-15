@@ -11,12 +11,8 @@ import MoreArrowIcon from '@/components/icon/MoreArrow'
 import BuySellArrowIcon from '@/components/icon/BuySellArrow'
 import { useOrderBook } from '@/lib/Context'
 import { useScreenSizeCheck } from '@/hooks/useScreenSize'
-
-export interface OrderBookItemType {
-  price: number
-  amount: number
-  total: number
-}
+import { OrderBookItemType } from '@/types/model'
+import { generateRandomOrderBookData } from '@/lib/dataGenerators'
 
 export default function OrderBook() {
   const isTablet = useScreenSizeCheck(1024)
@@ -24,35 +20,8 @@ export default function OrderBook() {
   const [randomData, setRandomData] = useState<OrderBookItemType[]>([])
   const { setSelectedOrderBook } = useOrderBook()
 
-  /**
-   *
-   * @param count pc :17 | tablet: 3
-   * @returns
-   */
-  function generateRandomData(count = 17) {
-    const data: OrderBookItemType[] = []
-
-    for (let i = 0; i < count; i++) {
-      const price = parseFloat(
-        (Math.random() * (100000 - 50000) + 50000).toFixed(2)
-      ) // 50000 ~ 100000
-      const amount = parseFloat(
-        (Math.random() * (0.01 - 0.0001) + 0.0001).toFixed(5)
-      ) // 0.0001 ~ 0.01
-      const total = parseFloat((price * amount).toFixed(5)) // price * amount
-
-      data.push({
-        price,
-        amount,
-        total,
-      })
-    }
-
-    return data
-  }
-
   useEffect(() => {
-    setRandomData(generateRandomData(isTablet ? 3 : 17))
+    setRandomData(generateRandomOrderBookData(isTablet ? 3 : 17))
   }, [isTablet])
 
   return (

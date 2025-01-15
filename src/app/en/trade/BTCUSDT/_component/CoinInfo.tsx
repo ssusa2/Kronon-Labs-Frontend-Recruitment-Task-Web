@@ -1,18 +1,10 @@
 'use client'
 import StarIcon from '@/components/icon/Star'
+import { useScreenSizeCheck } from '@/hooks/useScreenSize'
 import React from 'react'
 
 export default function CoinInfo() {
-  const [isMobile, setIsMobile] = React.useState(false)
-
-  React.useEffect(() => {
-    // 브라우저 환경에서만 실행
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  const isMobile = useScreenSizeCheck(768)
 
   return (
     <section className='subHeader card-ui'>

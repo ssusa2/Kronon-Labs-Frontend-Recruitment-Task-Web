@@ -25,7 +25,6 @@ export default function CoinPage() {
       <Chart />
       <MarketActivity />
       <BasicTable />
-
       {/* <section className='mobile:hidden footer '>푸터</section> */}
       <section className='hidden left'></section>
       <section className='hidden right'></section>

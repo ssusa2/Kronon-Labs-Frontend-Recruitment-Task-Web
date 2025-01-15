@@ -3,6 +3,7 @@
 import MoreIcon from '@/components/icon/More'
 import Tabs from '@/components/tabs/Tabs'
 import { useScreenSizeCheck } from '@/hooks/useScreenSize'
+import { generateRandomTradeData } from '@/lib/dataGenerators'
 import { useEffect, useState } from 'react'
 
 const tabs = [
@@ -24,26 +25,8 @@ export default function Trades() {
   >([])
 
   useEffect(() => {
-    setRandomData(generateRandomData(500))
+    setRandomData(generateRandomTradeData(500))
   }, [])
-
-  function generateRandomData(count = 17) {
-    return Array.from({ length: count }, () => {
-      const price = parseFloat(
-        (Math.random() * (100000 - 50000) + 50000).toFixed(2)
-      )
-      const amount = parseFloat(
-        (Math.random() * (0.01 - 0.0001) + 0.0001).toFixed(5)
-      )
-      const now = new Date()
-      const randomTimeOffset = Math.floor(Math.random() * 10000) // 최대 10초 차이
-      const time = new Date(now.getTime() - randomTimeOffset)
-        .toISOString()
-        .slice(11, 19) // 'HH:mm:ss' 형식
-
-      return { price, amount, time }
-    })
-  }
 
   return (
     <section className='mobile:hidden trades !bg-basicBg card-ui'>

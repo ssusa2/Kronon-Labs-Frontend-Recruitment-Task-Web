@@ -3,6 +3,8 @@ import CloseIcon from '@/components/icon/Close'
 import SearchIcon from '@/components/icon/Search'
 import StarIcon from '@/components/icon/Star'
 import Tabs from '@/components/tabs/Tabs'
+import { generateCoinList } from '@/lib/dataGenerators'
+import { coinListType } from '@/types/model'
 import { useEffect, useState } from 'react'
 
 const coinTabs = [
@@ -27,110 +29,6 @@ const coinTabs = [
     content: <div>BNB Content</div>,
   },
 ]
-
-interface coinListType {
-  isFavorite: boolean
-  coinName: string
-  multiple: number
-  lastPrice: number
-  changePercent: number
-}
-
-function generateCoinList(count: number): coinListType[] {
-  const coins: coinListType[] = []
-  const coinNames = [
-    'BTC',
-    'ETH',
-    'BNB',
-    'XRP',
-    'ADA',
-    'DOGE',
-    'SOL',
-    'DOT',
-    'MATIC',
-    'SHIB',
-    'LTC',
-    'AVAX',
-    'UNI',
-    'LINK',
-    'ATOM',
-    'XMR',
-    'XTZ',
-    'NEAR',
-    'ALGO',
-    'AAVE',
-    'EOS',
-    'MANA',
-    'SAND',
-    'APE',
-    'AXS',
-    'GALA',
-    'FLOW',
-    'CRV',
-    'MKR',
-    'FTM',
-    'QNT',
-    'CHZ',
-    'KSM',
-    'RUNE',
-    'ENJ',
-    'SNX',
-    'ZIL',
-    'BAT',
-    'LRC',
-    'COMP',
-    '1INCH',
-    'CRO',
-    'HNT',
-    'CEL',
-    'YFI',
-    'ZRX',
-    'ICX',
-    'ANKR',
-    'DGB',
-    'HOT',
-    'RVN',
-    'QTUM',
-    'ONT',
-    'IOTA',
-    'SC',
-    'AR',
-    'STG',
-    'AI',
-    'COOKIE',
-    'PNUT',
-    'NEIRO',
-    'DEXE',
-    'FTT',
-    'TFUEL',
-    'COW',
-    'ZEN',
-    'ACT',
-    'AIXBT',
-    'ZENITH',
-  ]
-
-  for (let i = 0; i < count; i++) {
-    const coinName =
-      coinNames[Math.floor(Math.random() * coinNames.length)] + '/USDT'
-    const isFavorite = Math.random() < 0.5
-    const multiple = Math.floor(Math.random() * 10) + 1
-    const lastPrice = parseFloat((Math.random() * 20).toFixed(4))
-    const changePercent = parseFloat(
-      ((Math.random() * 20 - 10) * -1).toFixed(2)
-    )
-
-    coins.push({
-      isFavorite,
-      coinName,
-      multiple,
-      lastPrice,
-      changePercent,
-    })
-  }
-
-  return coins
-}
 
 export default function SearchCoin() {
   const [coinList, setCoinList] = useState<coinListType[]>([])

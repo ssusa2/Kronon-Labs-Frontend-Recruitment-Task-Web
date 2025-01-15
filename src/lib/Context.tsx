@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 
-// OrderBook 데이터 타입 정의
 interface OrderBookItem {
   price: number
   amount: number
@@ -16,7 +15,6 @@ const OrderBookContext = createContext<OrderBookContextType | undefined>(
   undefined
 )
 
-// Provider 컴포넌트 생성
 export const OrderBookProvider = ({ children }: { children: ReactNode }) => {
   const [selectedOrderBook, setSelectedOrderBook] =
     useState<OrderBookItem | null>(null)

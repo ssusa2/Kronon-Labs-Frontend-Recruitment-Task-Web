@@ -3,49 +3,8 @@
 import { useEffect, useState } from 'react'
 import Title from '@/components/card/Title'
 import DoubleDropDown from '@/components/icon/DoubleDropDown'
-
-interface MarketActivityItemType {
-  coinName: string
-  time: string
-  moveKind:
-    | 'New 24hr High'
-    | '[Mid] 5min Rise'
-    | '[Small] 2hr Rise'
-    | 'Rally'
-    | 'Pullback'
-  percent: string
-  iconType: 'New' | 'Mid' | 'Small' | 'Rally' | 'Pullback'
-}
-
-function generateRandomMarketActivityData(
-  count: number
-): MarketActivityItemType[] {
-  const coinNames = ['BTC', 'ETH', 'XRP', 'ADA', 'SOL', 'BNB', 'DOGE', 'DOT']
-  const moveKinds: MarketActivityItemType['moveKind'][] = [
-    'New 24hr High',
-    '[Mid] 5min Rise',
-    '[Small] 2hr Rise',
-    'Rally',
-    'Pullback',
-  ]
-  const iconTypes: MarketActivityItemType['iconType'][] = [
-    'New',
-    'Mid',
-    'Small',
-    'Rally',
-    'Pullback',
-  ]
-
-  return Array.from({ length: count }, () => ({
-    coinName: coinNames[Math.floor(Math.random() * coinNames.length)],
-    time: new Date(Date.now() - Math.floor(Math.random() * 3600000))
-      .toISOString()
-      .slice(11, 19),
-    moveKind: moveKinds[Math.floor(Math.random() * moveKinds.length)],
-    percent: `${(Math.random() * (10 - 0.1) + 0.1).toFixed(2)}`,
-    iconType: iconTypes[Math.floor(Math.random() * iconTypes.length)],
-  }))
-}
+import { generateRandomMarketActivityData } from '@/lib/dataGenerators'
+import { MarketActivityItemType } from '@/types/model'
 
 export default function MarketActivity() {
   const [marketList, setMarketList] = useState<MarketActivityItemType[]>([])
